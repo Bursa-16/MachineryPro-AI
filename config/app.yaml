@@ -1,0 +1,27 @@
+# Machinery AI - base configuration (Stage 1)
+# Values here describe the workspace discovered in Stage 0. Nothing in this
+# file grants write access to source-material folders.
+
+app:
+  name: Machinery AI
+  version: 0.1.0
+  principle: deterministic_authoritative   # AI assists; deterministic core decides
+
+paths:
+  source_material:
+    articles_dir: Machinery_Article        # read-only corpus (457 files inventoried)
+    programs_dir: Progamlar                # historical folder name (typo of "Programlar");
+                                           # do NOT rename without explicit approval
+  outputs:
+    literature_catalog: data/literature_catalog.csv
+    dedup_report: data/dedup_report.csv
+
+corpus:
+  index_on_startup: false                  # indexing is an explicit script action
+  formats: [pdf, docx, doc, md, xml]
+  hash_algorithm: sha256
+
+governance:
+  external_redistribution_of_publisher_pdfs: false   # internal grounding only
+  provenance_required: true                          # every constant cites doc+locator
+  delete_without_approval: false                     # cleanup is report-only until approved
