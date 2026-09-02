@@ -16,20 +16,20 @@ from decimal import Decimal, InvalidOperation
 from enum import StrEnum
 from typing import Union
 
-from backend.domain.exceptions import ValidationError
+from backend.domain.exceptions import UnitError, UnknownUnitError, ValidationError
 
 Numeric = Union[int, float, str, Decimal]
 
 
 def _to_decimal(value: Numeric, field: str) -> Decimal:
     if isinstance(value, bool):
-        raise ValidationError(f"{field}: bool is not a valid numeric value")
+        raise UnitError(f"{field}: bool is not a valid numeric value")
     try:
         converted = Decimal(value if isinstance(value, Decimal) else str(value))
     except (InvalidOperation, ValueError, TypeError) as exc:
-        raise ValidationError(f"{field}: not a valid number: {value!r}") from exc
+        raise UnitError(f"{field}: not a valid number: {value!r}") from exc
     if not converted.is_finite():
-        raise ValidationError(f"{field}: value must be finite, got {converted}")
+        raise UnitError(f"{field}: value must be finite, got {converted}")
     return converted
 
 
@@ -71,9 +71,17 @@ class Quantity:
     # Factories
     # ------------------------------------------------------------------ #
     @classmethod
-    def of(cls, value: Numeric, unit: Unit | str) -> "Quantity":
+    def of(cls, value: Numeric, unit: Unit | str) -> Quantity:
         """Build a quantity from any numeric-like value and unit symbol."""
-        unit_value = Unit(unit) if not isinstance(unit, Unit) else unit
+        if isinstance(unit, Unit):
+            unit_value = unit
+        else:
+            try:
+                unit_value = Unit(unit)
+            except ValueError as exc:
+                raise UnknownUnitError(
+                    f"unknown unit symbol: {unit!r}"
+                ) from exc
         return cls(value=_to_decimal(value, "value"), unit=unit_value)
 
     # ------------------------------------------------------------------ #
@@ -83,7 +91,7 @@ class Quantity:
         """True when the value is strictly greater than zero."""
         return self.value > 0
 
-    def require_same_unit(self, other: "Quantity", *, context: str = "") -> None:
+    def require_same_unit(self, other: Quantity, *, context: str = "") -> None:
         """Raise unless ``other`` carries exactly the same unit.
 
         There is no implicit conversion: comparing mm against m is a caller

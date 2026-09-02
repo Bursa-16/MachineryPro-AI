@@ -16,7 +16,17 @@ class ValidationError(DomainError):
     """Raised when engineering input violates a domain invariant."""
 
 
-class UnknownUnitError(ValidationError):
+class UnitError(ValidationError):
+    """Quantity/units-layer error (base).
+
+    Covers invalid quantity construction: a non-numeric or non-finite value,
+    or an unknown unit symbol. The canonical descriptive subclass for the
+    unknown-symbol case is :class:`UnknownUnitError`; both names are exported
+    so the historical ``UnitError`` import path keeps working.
+    """
+
+
+class UnknownUnitError(UnitError):
     """Raised when a unit symbol is not part of the canonical unit model."""
 
 

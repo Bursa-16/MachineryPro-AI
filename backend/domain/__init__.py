@@ -24,16 +24,18 @@ from backend.domain.enums import (
 from backend.domain.exceptions import (
     DomainError,
     DuplicateRuleError,
-    RuleNotFoundError,
     RuleError,
+    RuleNotFoundError,
+    UnitError,
+    UnknownUnitError,
     ValidationError,
 )
+from backend.domain.feature import Feature
 from backend.domain.machine import Machine
 from backend.domain.material import Material
 from backend.domain.operation import Operation
 from backend.domain.parameters import MachiningParameters
 from backend.domain.part import Part
-from backend.domain.feature import Feature
 from backend.domain.result import EngineeringResult
 from backend.domain.tool import Tool
 from backend.domain.units import Quantity, Unit
@@ -63,6 +65,8 @@ __all__ = [
     "Tool",
     "ToolType",
     "Unit",
+    "UnitError",
+    "UnknownUnitError",
     "ValidationError",
     "entity_as_dict",
     "json_safe",

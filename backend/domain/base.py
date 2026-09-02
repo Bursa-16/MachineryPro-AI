@@ -12,6 +12,7 @@ Principles (Stage 2):
 from __future__ import annotations
 
 import dataclasses
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from datetime import datetime
 from decimal import Decimal
@@ -163,18 +164,26 @@ class Provenance:
 def json_safe(value: Any) -> Any:
     """Convert a dataclass tree into JSON-serializable primitives.
 
-    Decimal -> string (exact), Enum -> value, datetime -> ISO-8601;
-    mappings/tuples/lists are recursed preserving order.
+    Quantity -> its exact decimal value as a string, Decimal -> string
+    (exact), Enum -> value, datetime -> ISO-8601; mappings/tuples/lists are
+    recursed preserving order. Fields are read via ``dataclasses.fields``
+    instead of ``dataclasses.asdict`` so frozen mappings (MappingProxyType)
+    never require deepcopy.
     """
+    if isinstance(value, Quantity):
+        return str(value.value)
     if dataclasses.is_dataclass(value) and not isinstance(value, type):
-        return json_safe(dataclasses.asdict(value))
+        return {
+            f.name: json_safe(getattr(value, f.name))
+            for f in dataclasses.fields(value)
+        }
     if isinstance(value, Decimal):
         return str(value)
     if isinstance(value, Enum):
         return value.value
     if isinstance(value, datetime):
         return value.isoformat()
-    if isinstance(value, dict):
+    if isinstance(value, Mapping):
         return {key: json_safe(item) for key, item in value.items()}
     if isinstance(value, (list, tuple)):
         return [json_safe(item) for item in value]
@@ -183,4 +192,4 @@ def json_safe(value: Any) -> Any:
 
 def entity_as_dict(entity: Any) -> dict[str, Any]:
     """Deterministic serialization-friendly representation of an entity."""
-    return json_safe(dataclasses.asdict(entity))
+    return json_safe(entity)
