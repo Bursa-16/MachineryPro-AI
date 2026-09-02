@@ -51,6 +51,8 @@ class Unit(StrEnum):
     KG_M3 = "kg/m3"
     RA_UM = "Ra_um"
     DIMENSIONLESS = "1"
+    MM3_MIN = "mm3/min"
+    MIN = "min"
 
 
 @dataclass(frozen=True, slots=True)
