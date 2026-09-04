@@ -1,5 +1,12 @@
-"""Cutting-tool and insert registry (ISO 13399-style field model planned).
+"""Cutting-tool and insert registry (Stage 3G).
 
-No vendor catalog data exists locally yet (Stage 0 finding); schema-first
-development until licensed data sources are acquired (Stage 6).
+Stage 0 finding: no vendor catalog data exists locally; schema-first
+development until licensed data sources are acquired.
+
+Stage 3G adds the deterministic in-memory catalog and lookup layer.
+No production seed data is included.
 """
+
+from backend.tooling.catalog import ToolCatalog
+
+__all__ = ["ToolCatalog"]

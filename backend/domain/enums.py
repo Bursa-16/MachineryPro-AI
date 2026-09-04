@@ -134,3 +134,25 @@ class ResultStatus(StrEnum):
     WARNING = "WARNING"
     FAIL = "FAIL"
     INSUFFICIENT_DATA = "INSUFFICIENT_DATA"
+
+
+class IsoMaterialGroup(StrEnum):
+    """ISO 513 cutting material group classification."""
+
+    P = "P"
+    M = "M"
+    K = "K"
+    N = "N"
+    S = "S"
+    H = "H"
+
+
+class ToolMaterial(StrEnum):
+    """Cutting tool substrate / material classification."""
+
+    HSS = "HSS"
+    CARBIDE = "carbide"
+    CERMET = "cermet"
+    CERAMIC = "ceramic"
+    CBN = "CBN"
+    PCD = "PCD"
