@@ -1,6 +1,6 @@
 """Universal Engineering Interoperability Foundation for MachineryPro AI.
 
-Stage 4A — establishes vendor-neutral contracts, data structures, adapter
+Stage 4A \u2014 establishes vendor-neutral contracts, data structures, adapter
 interfaces, format capability model, source identity model, canonical-document
 envelope, and conversion-fidelity semantics required by all future
 CAD/CAM/CAE/drawing/PMI/NC ingestion stages.
@@ -21,20 +21,22 @@ Non-negotiable fidelity principle (exact statement):
 Architecture pipeline::
 
     SOURCE FILE / ENGINEERING SOURCE
-        ↓
-    FORMAT ADAPTER / PARSER (Stage 4B+)
-        ↓
-    CANONICAL ENGINEERING REPRESENTATION (CER)   ← this package
-        ↓
-    SEMANTIC NORMALIZATION (Stage 4D+)
-        ↓
-    MACHINERYPRO DOMAIN MODELS (Stages 3A–3J)
-        ↓
-    DETERMINISTIC ENGINEERING ANALYSIS
-        ↓
-    VALIDATION / COMPARISON (Stage 4L+)
-        ↓
-    EXPORT / CONVERSION + FIDELITY REPORT (Stage 4M)
+        \u2193
+    FormatAdapter / parser (Stage 4B+)
+        \u2193
+    Canonical Engineering Representation (CER)   \u2190 this package
+        \u2193
+    Canonical Geometry / Topology (Stage 4B)
+        \u2193
+    Semantic Normalization (Stage 4D+)
+        \u2193
+    MachineryPro domain models (Stages 3A\u20133J)
+        \u2193
+    Deterministic engineering analysis
+        \u2193
+    Validation / comparison (Stage 4L+)
+        \u2193
+    Export / conversion + fidelity report (Stage 4M)
 
 Vendor independence
 -------------------
@@ -44,12 +46,11 @@ NX, SolidWorks, Parasolid, Mastercam, etc. are optional plugins; the
 core interoperability package functions without them.
 
 Exports
--------
-Enums: :class:`FormatFamily`, :class:`AdapterCapability`,
+  Enums (Stage 4A): :class:`FormatFamily`, :class:`AdapterCapability`,
 :class:`CapabilityLevel`, :class:`AdapterLicense`, :class:`FidelityClass`,
 :class:`FidelityReportCompleteness`, :class:`NormalizationStatus`
 
-Models: :class:`EngineeringSource`, :class:`FormatDescriptor`,
+Models (Stage 4A): :class:`EngineeringSource`, :class:`FormatDescriptor`,
 :class:`AdapterMetadata`, :class:`CanonicalEntityRef`,
 :class:`FidelityEvent`, :class:`ConversionFidelityReport`,
 :class:`CanonicalDocument`
@@ -57,6 +58,20 @@ Models: :class:`EngineeringSource`, :class:`FormatDescriptor`,
 Adapter interface: :class:`FormatAdapter`
 
 Registry: :class:`AdapterRegistry`, :class:`AdapterRegistryError`
+
+Stage 4B \u2014 Canonical geometry / topology:
+
+Enums (Stage 4B): :class:`CanonicalCurveType`, :class:`CanonicalSurfaceType`,
+:class:`Orientation`, :class:`LoopType`, :class:`ShellClosure`,
+:class:`BodyType`
+
+Geometry models (Stage 4B): :class:`CanonicalPoint3D`,
+:class:`CanonicalVector3D`, :class:`BoundingBox3D`, :class:`CanonicalCurve`,
+:class:`CanonicalSurface`, :class:`CanonicalGeometry`
+
+Topology models (Stage 4B): :class:`CanonicalVertex`, :class:`CanonicalEdge`,
+:class:`CanonicalLoop`, :class:`CanonicalFace`, :class:`CanonicalShell`,
+:class:`CanonicalBody`, :class:`Transform3D`, :class:`CanonicalTopology`
 """
 
 from backend.interoperability.adapter import FormatAdapter
@@ -69,6 +84,17 @@ from backend.interoperability.enums import (
     FormatFamily,
     NormalizationStatus,
 )
+from backend.interoperability.geometry import (
+    BoundingBox3D,
+    CanonicalCurve,
+    CanonicalCurveType,
+    CanonicalGeometry,
+    CanonicalPoint3D,
+    CanonicalSurface,
+    CanonicalSurfaceType,
+    CanonicalVector3D,
+    GeometryContainerError,
+)
 from backend.interoperability.models import (
     AdapterMetadata,
     CanonicalDocument,
@@ -79,9 +105,24 @@ from backend.interoperability.models import (
     FormatDescriptor,
 )
 from backend.interoperability.registry import AdapterRegistry, AdapterRegistryError
+from backend.interoperability.topology import (
+    BodyType,
+    CanonicalBody,
+    CanonicalEdge,
+    CanonicalFace,
+    CanonicalLoop,
+    CanonicalShell,
+    CanonicalTopology,
+    CanonicalVertex,
+    LoopType,
+    Orientation,
+    ShellClosure,
+    TopologyContainerError,
+    Transform3D,
+)
 
 __all__ = [
-    # Enums
+    # Enums (Stage 4A)
     "AdapterCapability",
     "AdapterLicense",
     "CapabilityLevel",
@@ -89,7 +130,7 @@ __all__ = [
     "FidelityReportCompleteness",
     "FormatFamily",
     "NormalizationStatus",
-    # Models
+    # Models (Stage 4A)
     "AdapterMetadata",
     "CanonicalDocument",
     "CanonicalEntityRef",
@@ -102,4 +143,29 @@ __all__ = [
     # Registry
     "AdapterRegistry",
     "AdapterRegistryError",
+    # Stage 4B enums
+    "BodyType",
+    "CanonicalCurveType",
+    "CanonicalSurfaceType",
+    "LoopType",
+    "Orientation",
+    "ShellClosure",
+    # Stage 4B geometry
+    "BoundingBox3D",
+    "CanonicalCurve",
+    "CanonicalGeometry",
+    "CanonicalPoint3D",
+    "CanonicalSurface",
+    "CanonicalVector3D",
+    "GeometryContainerError",
+    # Stage 4B topology
+    "CanonicalBody",
+    "CanonicalEdge",
+    "CanonicalFace",
+    "CanonicalLoop",
+    "CanonicalShell",
+    "CanonicalTopology",
+    "CanonicalVertex",
+    "TopologyContainerError",
+    "Transform3D",
 ]
