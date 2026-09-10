@@ -1,0 +1,567 @@
+/* =========================================================================
+   MachineryPro AI — Design System (UI-DESIGN-0A)
+   =========================================================================
+   Centralized design tokens and component rules for a professional
+   engineering intelligence platform.
+
+   Product: CNC machining intelligence for manufacturing engineers
+   Style: Modern Industrial Engineering SaaS
+   Desktop-first · Data-dense · Deterministic-first · Traceable
+   ========================================================================= */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* =========================================================================
+   1. DESIGN TOKENS
+   ========================================================================= */
+:root {
+  /* --- Surface --- */
+  --mp-bg:              #f4f6f8;
+  --mp-bg-card:         #ffffff;
+  --mp-bg-sidebar:      #1a1f2e;
+  --mp-bg-sidebar-hover: rgba(255,255,255,0.05);
+  --mp-bg-sidebar-active: rgba(255,255,255,0.08);
+
+  /* --- Brand --- */
+  --mp-brand-50:        #eff6ff;
+  --mp-brand-500:       #2563eb;
+  --mp-brand-600:       #1d4ed8;
+  --mp-brand-700:       #1e40af;
+
+  /* --- Text --- */
+  --mp-text:            #1e293b;
+  --mp-text-secondary:  #475569;
+  --mp-text-muted:      #94a3b8;
+  --mp-text-inverse:    #f1f5f9;
+  --mp-text-sidebar:    #cbd5e1;
+  --mp-text-sidebar-active: #ffffff;
+
+  /* --- Border --- */
+  --mp-border:          #e2e8f0;
+  --mp-border-strong:   #cbd5e1;
+  --mp-border-sidebar:  rgba(255,255,255,0.08);
+
+  /* --- Engineering Status --- */
+  --mp-status-success-bg:    #ecfdf5;
+  --mp-status-success-border:#a7f3d0;
+  --mp-status-success-text:  #065f46;
+  --mp-status-success-dot:   #10b981;
+
+  --mp-status-warning-bg:    #fffbeb;
+  --mp-status-warning-border:#fde68a;
+  --mp-status-warning-text:  #92400e;
+  --mp-status-warning-dot:   #f59e0b;
+
+  --mp-status-error-bg:      #fef2f2;
+  --mp-status-error-border:  #fecaca;
+  --mp-status-error-text:    #991b1b;
+  --mp-status-error-dot:     #ef4444;
+
+  --mp-status-info-bg:       #eff6ff;
+  --mp-status-info-border:   #bfdbfe;
+  --mp-status-info-text:     #1e40af;
+  --mp-status-info-dot:      #3b82f6;
+
+  --mp-status-unavail-bg:    #f8fafc;
+  --mp-status-unavail-border:#e2e8f0;
+  --mp-status-unavail-text:  #64748b;
+  --mp-status-unavail-dot:   #94a3b8;
+
+  /* --- Deterministic vs AI --- */
+  --mp-calc-accent:     #2563eb;
+  --mp-calc-bg:         #eff6ff;
+  --mp-calc-border:     #bfdbfe;
+  --mp-calc-label-bg:   #dbeafe;
+  --mp-calc-label-text: #1e40af;
+
+  --mp-ai-accent:       #7c3aed;
+  --mp-ai-bg:           #f5f3ff;
+  --mp-ai-border:       #c4b5fd;
+  --mp-ai-label-bg:     #ede9fe;
+  --mp-ai-label-text:   #5b21b6;
+
+  /* --- Typography --- */
+  --mp-font:            'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mp-font-mono:       'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+
+  --mp-text-xs:   0.6875rem; /* 11px */
+  --mp-text-sm:   0.8125rem; /* 13px */
+  --mp-text-base: 0.875rem;  /* 14px */
+  --mp-text-md:   1rem;      /* 16px */
+  --mp-text-lg:   1.125rem;  /* 18px */
+  --mp-text-xl:   1.375rem;  /* 22px */
+
+  /* --- Spacing --- */
+  --mp-sp-1:  0.25rem;
+  --mp-sp-2:  0.5rem;
+  --mp-sp-3:  0.75rem;
+  --mp-sp-4:  1rem;
+  --mp-sp-5:  1.25rem;
+  --mp-sp-6:  1.5rem;
+  --mp-sp-8:  2rem;
+  --mp-sp-10: 2.5rem;
+
+  /* --- Radius (restrained — engineering, not consumer) --- */
+  --mp-radius-sm: 3px;
+  --mp-radius:    5px;
+  --mp-radius-md: 6px;
+  --mp-radius-lg: 8px;
+
+  /* --- Shadow (minimal) --- */
+  --mp-shadow-card:  0 1px 2px rgba(0,0,0,0.04);
+  --mp-shadow-popup: 0 4px 12px rgba(0,0,0,0.10);
+}
+
+/* =========================================================================
+   2. BASE
+   ========================================================================= */
+html { height: 100%; }
+body {
+  height: 100%; margin: 0;
+  font-family: var(--mp-font);
+  font-size: var(--mp-text-base);
+  line-height: 1.5;
+  color: var(--mp-text);
+  background: var(--mp-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* =========================================================================
+   3. APPLICATION SHELL
+   ========================================================================= */
+.mp-shell { display: flex; height: 100%; }
+
+/* --- Sidebar --- */
+.mp-sidebar {
+  display: flex; flex-direction: column;
+  width: 15rem; min-width: 15rem;
+  background: var(--mp-bg-sidebar);
+  color: var(--mp-text-sidebar);
+  border-right: 1px solid var(--mp-border-sidebar);
+}
+.mp-sidebar__brand {
+  padding: var(--mp-sp-5) var(--mp-sp-5) var(--mp-sp-4);
+  border-bottom: 1px solid var(--mp-border-sidebar);
+}
+.mp-sidebar__brand-title {
+  font-size: var(--mp-text-lg); font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--mp-text-sidebar-active);
+  margin: 0; line-height: 1.25;
+}
+.mp-sidebar__brand-subtitle {
+  font-size: var(--mp-text-xs);
+  color: var(--mp-text-muted);
+  margin-top: 2px;
+}
+
+/* --- Navigation --- */
+.mp-sidebar__nav { flex: 1; overflow-y: auto; padding: var(--mp-sp-3); }
+.mp-sidebar__nav-list {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: 2px;
+}
+.mp-nav-item {
+  display: flex; align-items: center; gap: var(--mp-sp-3);
+  padding: var(--mp-sp-2) var(--mp-sp-3);
+  font-size: var(--mp-text-sm); font-weight: 500;
+  color: var(--mp-text-sidebar);
+  text-decoration: none;
+  border-radius: var(--mp-radius);
+  border-left: 3px solid transparent;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.mp-nav-item:hover {
+  background: var(--mp-bg-sidebar-hover);
+  color: var(--mp-text-sidebar-active);
+}
+.mp-nav-item--active {
+  background: var(--mp-bg-sidebar-active);
+  color: #e2e8f0;
+  border-left-color: rgba(37,99,235,0.7);
+  font-weight: 600;
+}
+
+/* --- Planned Badge --- */
+.mp-badge-planned {
+  margin-left: auto;
+  font-size: 0.5625rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--mp-text-muted);
+  background: rgba(255,255,255,0.08);
+  padding: 1px 6px;
+  border-radius: var(--mp-radius-sm);
+}
+
+/* --- Sidebar Footer --- */
+.mp-sidebar__footer {
+  padding: var(--mp-sp-4) var(--mp-sp-5);
+  border-top: 1px solid var(--mp-border-sidebar);
+}
+.mp-sidebar__status {
+  display: flex; align-items: center; gap: var(--mp-sp-2);
+  font-size: var(--mp-text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--mp-status-success-dot);
+}
+.mp-sidebar__status-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%; background: currentColor;
+}
+.mp-sidebar__version {
+  font-size: 0.5625rem; color: var(--mp-text-muted); margin-top: 2px;
+}
+
+/* --- Main --- */
+.mp-main { flex: 1; overflow-y: auto; }
+.mp-content {
+  max-width: 76rem; margin: 0 auto;
+  padding: var(--mp-sp-6) var(--mp-sp-8);
+}
+
+/* =========================================================================
+   4. PAGE HEADER
+   ========================================================================= */
+.mp-page-header { margin-bottom: var(--mp-sp-6); }
+.mp-page-title {
+  font-size: var(--mp-text-xl); font-weight: 700;
+  color: var(--mp-text); margin: 0; line-height: 1.3;
+}
+.mp-page-subtitle {
+  font-size: var(--mp-text-sm); color: var(--mp-text-secondary);
+  margin-top: var(--mp-sp-1);
+}
+
+/* =========================================================================
+   5. STATUS BANNERS
+   ========================================================================= */
+.mp-banner {
+  display: flex; align-items: center; gap: var(--mp-sp-3);
+  padding: var(--mp-sp-3) var(--mp-sp-4);
+  border-radius: var(--mp-radius-md);
+  border: 1px solid;
+  margin-bottom: var(--mp-sp-6);
+  font-size: var(--mp-text-sm);
+}
+.mp-banner--success { background: var(--mp-status-success-bg); border-color: var(--mp-status-success-border); color: var(--mp-status-success-text); }
+.mp-banner--warning { background: var(--mp-status-warning-bg); border-color: var(--mp-status-warning-border); color: var(--mp-status-warning-text); }
+.mp-banner--error   { background: var(--mp-status-error-bg);   border-color: var(--mp-status-error-border);   color: var(--mp-status-error-text); }
+.mp-banner--info    { background: var(--mp-status-info-bg);    border-color: var(--mp-status-info-border);    color: var(--mp-status-info-text); }
+.mp-banner--unavail { background: var(--mp-status-unavail-bg); border-color: var(--mp-status-unavail-border); color: var(--mp-status-unavail-text); }
+
+.mp-banner__dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.mp-banner--success .mp-banner__dot { background: var(--mp-status-success-dot); }
+.mp-banner--warning .mp-banner__dot { background: var(--mp-status-warning-dot); }
+.mp-banner--error   .mp-banner__dot { background: var(--mp-status-error-dot); }
+.mp-banner--info    .mp-banner__dot { background: var(--mp-status-info-dot); }
+.mp-banner--unavail .mp-banner__dot { background: var(--mp-status-unavail-dot); }
+
+.mp-banner__title  { font-weight: 600; }
+.mp-banner__detail { font-size: var(--mp-text-xs); opacity: 0.85; }
+
+/* =========================================================================
+   6. CARDS
+   ========================================================================= */
+.mp-card {
+  background: var(--mp-bg-card);
+  border: 1px solid var(--mp-border);
+  border-radius: var(--mp-radius-md);
+  padding: var(--mp-sp-5);
+}
+.mp-card__header {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--mp-sp-3);
+}
+.mp-card__section-label {
+  font-size: var(--mp-text-xs); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.04em;
+  color: var(--mp-text-muted);
+}
+.mp-card__title {
+  font-size: var(--mp-text-md); font-weight: 700;
+  color: var(--mp-text); margin: 0;
+}
+.mp-card__body {
+  font-size: var(--mp-text-sm); color: var(--mp-text-secondary);
+  line-height: 1.55;
+}
+
+/* --- Deterministic result card --- */
+.mp-card--calc  { border-left: 3px solid var(--mp-calc-accent); }
+/* --- AI advisory card --- */
+.mp-card--ai    { border-left: 3px dashed var(--mp-ai-accent); }
+
+/* --- Card grid --- */
+.mp-card-grid { display: grid; gap: var(--mp-sp-4); }
+.mp-card-grid--2 { grid-template-columns: repeat(2, 1fr); }
+.mp-card-grid--3 { grid-template-columns: repeat(3, 1fr); }
+.mp-card-grid--4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) {
+  .mp-card-grid--3, .mp-card-grid--4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .mp-card-grid--2, .mp-card-grid--3, .mp-card-grid--4 { grid-template-columns: 1fr; }
+}
+
+/* =========================================================================
+   7. BADGES
+   ========================================================================= */
+.mp-badge {
+  display: inline-flex; align-items: center;
+  font-size: 0.5625rem; font-weight: 700;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 2px 8px; border-radius: var(--mp-radius-sm);
+}
+.mp-badge--ready   { background: #d1fae5; color: #065f46; }
+.mp-badge--partial { background: #fef3c7; color: #92400e; }
+.mp-badge--failed  { background: #fee2e2; color: #991b1b; }
+.mp-badge--unavail { background: #f1f5f9; color: #64748b; }
+
+.mp-badge--calc {
+  background: var(--mp-calc-label-bg); color: var(--mp-calc-label-text);
+  border: 1px solid var(--mp-calc-border);
+}
+.mp-badge--ai {
+  background: var(--mp-ai-label-bg); color: var(--mp-ai-label-text);
+  border: 1px dashed var(--mp-ai-border);
+}
+
+/* =========================================================================
+   8. PROPERTY TABLE (key-value pairs)
+   ========================================================================= */
+.mp-props { font-size: var(--mp-text-sm); }
+.mp-props__row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: var(--mp-sp-1) 0;
+  border-bottom: 1px solid var(--mp-border);
+}
+.mp-props__row:last-child { border-bottom: none; }
+.mp-props__key   { color: var(--mp-text-secondary); }
+.mp-props__value { font-weight: 500; color: var(--mp-text); text-align: right; }
+
+/* =========================================================================
+   9. DATA TABLE
+   ========================================================================= */
+.mp-table { width: 100%; border-collapse: collapse; font-size: var(--mp-text-sm); }
+.mp-table th {
+  text-align: left; font-weight: 600;
+  font-size: var(--mp-text-xs);
+  letter-spacing: 0.03em;
+  color: var(--mp-text-muted);
+  padding: var(--mp-sp-2) var(--mp-sp-3);
+  border-bottom: 2px solid var(--mp-border-strong);
+}
+.mp-table td {
+  padding: var(--mp-sp-2) var(--mp-sp-3);
+  border-bottom: 1px solid var(--mp-border);
+  color: var(--mp-text); vertical-align: top;
+}
+.mp-table .mp-numeric { text-align: right; font-variant-numeric: tabular-nums; }
+.mp-table tbody tr:hover { background: rgba(0,0,0,0.015); }
+
+/* =========================================================================
+   10. BUTTONS
+   ========================================================================= */
+.mp-btn {
+  display: inline-flex; align-items: center; gap: var(--mp-sp-2);
+  font-family: var(--mp-font); font-size: var(--mp-text-sm); font-weight: 600;
+  padding: var(--mp-sp-2) var(--mp-sp-4);
+  border-radius: var(--mp-radius); border: 1px solid transparent;
+  cursor: pointer; transition: background 0.15s, border-color 0.15s;
+}
+.mp-btn:focus-visible {
+  outline: 2px solid var(--mp-brand-500); outline-offset: 2px;
+}
+.mp-btn--primary {
+  background: var(--mp-brand-600); color: #fff; border-color: var(--mp-brand-700);
+}
+.mp-btn--primary:hover { background: var(--mp-brand-700); }
+.mp-btn--secondary {
+  background: var(--mp-bg-card); color: var(--mp-text); border-color: var(--mp-border-strong);
+}
+.mp-btn--secondary:hover { background: var(--mp-bg); }
+
+/* =========================================================================
+   11. FORMS
+   ========================================================================= */
+.mp-label {
+  display: block; font-size: var(--mp-text-sm); font-weight: 500;
+  color: var(--mp-text-secondary); margin-bottom: var(--mp-sp-1);
+}
+.mp-input {
+  display: block; width: 100%;
+  font-family: var(--mp-font); font-size: var(--mp-text-sm);
+  padding: var(--mp-sp-2) var(--mp-sp-3);
+  border: 1px solid var(--mp-border-strong); border-radius: var(--mp-radius);
+  background: var(--mp-bg-card); color: var(--mp-text);
+  transition: border-color 0.15s;
+}
+.mp-input:focus {
+  outline: none; border-color: var(--mp-brand-500);
+  box-shadow: 0 0 0 2px var(--mp-brand-50);
+}
+.mp-input-hint { font-size: var(--mp-text-xs); color: var(--mp-text-muted); margin-top: 2px; }
+
+/* =========================================================================
+   12. EMPTY STATE
+   ========================================================================= */
+.mp-empty {
+  text-align: center; padding: var(--mp-sp-10) var(--mp-sp-6);
+  color: var(--mp-text-muted);
+}
+.mp-empty__title {
+  font-size: var(--mp-text-md); font-weight: 600;
+  color: var(--mp-text-secondary); margin-bottom: var(--mp-sp-2);
+}
+.mp-empty__detail {
+  font-size: var(--mp-text-sm); max-width: 28rem; margin: 0 auto;
+}
+
+/* =========================================================================
+   13. TABS
+   ========================================================================= */
+.mp-tabs {
+  display: flex; gap: 0; border-bottom: 2px solid var(--mp-border);
+  margin-bottom: var(--mp-sp-5);
+}
+.mp-tab {
+  padding: var(--mp-sp-2) var(--mp-sp-4);
+  font-size: var(--mp-text-sm); font-weight: 500;
+  color: var(--mp-text-muted); text-decoration: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px; cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.mp-tab:hover { color: var(--mp-text); }
+.mp-tab--active { color: var(--mp-brand-600); border-bottom-color: var(--mp-brand-600); font-weight: 600; }
+
+/* =========================================================================
+   14. DETAIL/ACCORDION PANEL
+   ========================================================================= */
+.mp-detail { border: 1px solid var(--mp-border); border-radius: var(--mp-radius-md); }
+.mp-detail__header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--mp-sp-3) var(--mp-sp-4);
+  font-size: var(--mp-text-sm); font-weight: 600; color: var(--mp-text-secondary);
+  cursor: pointer; background: var(--mp-bg);
+  border-radius: var(--mp-radius-md);
+}
+.mp-detail__body { padding: var(--mp-sp-4); }
+
+/* =========================================================================
+   15. ICONS (Lucide-style CSS masks)
+   ========================================================================= */
+.icon {
+  display: inline-block; width: 1.125rem; height: 1.125rem;
+  background-color: currentColor; flex-shrink: 0;
+  mask-size: contain; mask-repeat: no-repeat; mask-position: center;
+  -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
+}
+.icon-home         { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'/%3E%3Cpolyline points='9 22 9 12 15 12 15 22'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+.icon-upload       { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpolyline points='17 8 12 3 7 8'/%3E%3Cline x1='12' y1='3' x2='12' y2='15'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+.icon-box          { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z'/%3E%3Cpath d='m3.3 7 8.7 5 8.7-5'/%3E%3Cpath d='M12 22V12'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+.icon-settings     { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'/%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+.icon-wrench       { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+.icon-layers       { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='12 2 2 7 12 12 22 7 12 2'/%3E%3Cpolyline points='2 17 12 22 22 17'/%3E%3Cpolyline points='2 12 12 17 22 12'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+.icon-shield-check { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/%3E%3Cpath d='m9 12 2 2 4-4'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+.icon-sparkles     { --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z'/%3E%3Cpath d='M5 3v4'/%3E%3Cpath d='M19 17v4'/%3E%3Cpath d='M3 5h4'/%3E%3Cpath d='M17 19h4'/%3E%3C/svg%3E"); mask-image: var(--svg); -webkit-mask-image: var(--svg); }
+
+/* =========================================================================
+   16. NAVIGATION GROUPS (collapsible sidebar sections)
+   ========================================================================= */
+.mp-nav-group {
+  margin-bottom: var(--mp-sp-2);
+}
+.mp-nav-group > summary {
+  display: flex; align-items: center;
+  padding: var(--mp-sp-1) var(--mp-sp-3);
+  font-size: 0.625rem; /* 10px */
+  font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(148,163,184,0.6);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.mp-nav-group > summary::-webkit-details-marker { display: none; }
+.mp-nav-group > summary::before {
+  content: '▸'; margin-right: 6px;
+  font-size: 0.5rem; transition: transform 0.15s;
+}
+.mp-nav-group[open] > summary::before { transform: rotate(90deg); }
+.mp-nav-group__items {
+  list-style: none; margin: 0; padding: 0 0 0 0;
+  display: flex; flex-direction: column; gap: 1px;
+}
+
+/* =========================================================================
+   17. PROGRESSIVE DISCLOSURE (form sections)
+   ========================================================================= */
+.mp-form-section {
+  margin-bottom: var(--mp-sp-5);
+}
+.mp-form-section__header {
+  font-size: var(--mp-text-sm); font-weight: 600;
+  color: var(--mp-text-secondary);
+  margin-bottom: var(--mp-sp-3);
+}
+.mp-form-section__body {
+  display: flex; flex-direction: column; gap: var(--mp-sp-3);
+}
+.mp-form-section--basic {}
+.mp-form-section--advanced {}
+.mp-form-section--role {}
+
+/* Advanced toggle (details/summary) */
+.mp-advanced-toggle {
+  border: 1px solid var(--mp-border);
+  border-radius: var(--mp-radius-md);
+  margin-top: var(--mp-sp-4);
+}
+.mp-advanced-toggle > summary {
+  display: flex; align-items: center; gap: var(--mp-sp-2);
+  padding: var(--mp-sp-3) var(--mp-sp-4);
+  font-size: var(--mp-text-sm); font-weight: 500;
+  color: var(--mp-text-secondary);
+  cursor: pointer; list-style: none;
+  background: var(--mp-bg);
+  border-radius: var(--mp-radius-md);
+}
+.mp-advanced-toggle > summary::-webkit-details-marker { display: none; }
+.mp-advanced-toggle > summary::before {
+  content: '▸'; font-size: 0.625rem;
+  transition: transform 0.15s;
+}
+.mp-advanced-toggle[open] > summary::before { transform: rotate(90deg); }
+.mp-advanced-toggle[open] > summary {
+  border-bottom: 1px solid var(--mp-border);
+  border-radius: var(--mp-radius-md) var(--mp-radius-md) 0 0;
+}
+.mp-advanced-toggle__body {
+  padding: var(--mp-sp-4);
+}
+
+/* Field groups and unit input */
+.mp-field-group {
+  display: flex; flex-direction: column; gap: var(--mp-sp-1);
+}
+.mp-unit-input {
+  display: flex; align-items: center; gap: var(--mp-sp-2);
+}
+.mp-unit-input__unit {
+  font-size: var(--mp-text-xs); font-weight: 500;
+  color: var(--mp-text-muted); white-space: nowrap;
+}
+.mp-validation-message {
+  font-size: var(--mp-text-xs); color: var(--mp-status-error-text);
+  margin-top: 2px;
+}
+
+/* =========================================================================
+   18. UTILITIES
+   ========================================================================= */
+.mp-section-gap { margin-bottom: var(--mp-sp-6); }
+.mp-mono        { font-family: var(--mp-font-mono); font-size: 0.8125em; }
+.mp-sr-only     { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+                  overflow: hidden; clip: rect(0,0,0,0); border: 0; }

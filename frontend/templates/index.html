@@ -3,55 +3,41 @@
 {% block title %}Dashboard · MachineryPro AI{% endblock %}
 
 {% block content %}
-<!-- Page header -->
-<div class="mb-8">
-  <h1 class="text-2xl font-bold text-surface-900">Dashboard</h1>
-  <p class="mt-1 text-sm text-surface-500">
-    MachineryPro AI — deterministic-first machining intelligence platform.
-  </p>
+<div class="mp-page-header">
+  <h1 class="mp-page-title">Dashboard</h1>
+  <p class="mp-page-subtitle">MachineryPro AI — deterministic-first machining intelligence platform.</p>
 </div>
 
-<!-- Status banner -->
-<div class="mb-8 flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
-  <span class="h-3 w-3 rounded-full bg-emerald-500"></span>
+<div class="mp-banner mp-banner--success mp-section-gap">
+  <span class="mp-banner__dot"></span>
   <div>
-    <p class="text-sm font-semibold text-emerald-800">ENGINEERING CORE ONLINE</p>
-    <p class="text-xs text-emerald-600">
-      All deterministic calculation modules loaded. AI layer is advisory-only and clearly labelled.
-    </p>
+    <div class="mp-banner__title">ENGINEERING CORE ONLINE</div>
+    <div class="mp-banner__detail">All deterministic calculation modules loaded. AI layer is advisory-only and clearly labelled.</div>
   </div>
 </div>
 
-<!-- Capability cards -->
-<h2 class="mb-4 text-lg font-semibold text-surface-700">Available Capabilities</h2>
-<div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+<h2 style="font-size:var(--mp-text-md); font-weight:600; color:var(--mp-text-secondary); margin-bottom:var(--mp-sp-3);">Available Capabilities</h2>
+<div class="mp-card-grid mp-card-grid--4 mp-section-gap">
   {% for card in cards %}
-  <div class="flex flex-col rounded-xl border border-surface-200 bg-white p-5 shadow-sm">
-    <div class="mb-3 flex items-center justify-between">
-      <span class="text-xs font-semibold uppercase tracking-wider text-surface-400">
-        {{ card.stage }}
-      </span>
+  <div class="mp-card">
+    <div class="mp-card__header">
+      <span class="mp-card__section-label">{{ card.stage }}</span>
       {% if card.status == "READY" %}
-      <span class="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-bold
-                   uppercase tracking-wider text-emerald-700">Ready</span>
+      <span class="mp-badge mp-badge--ready">Ready</span>
       {% else %}
-      <span class="rounded-full bg-amber-100 px-2.5 py-0.5 text-[10px] font-bold
-                   uppercase tracking-wider text-amber-700">{{ card.status }}</span>
+      <span class="mp-badge mp-badge--partial">{{ card.status }}</span>
       {% endif %}
     </div>
-    <h3 class="text-base font-bold text-surface-900">{{ card.title }}</h3>
-    <p class="mt-2 flex-1 text-sm leading-relaxed text-surface-500">
-      {{ card.description }}
-    </p>
+    <h3 class="mp-card__title">{{ card.title }}</h3>
+    <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">{{ card.description }}</p>
   </div>
   {% endfor %}
 </div>
 
-<!-- Architecture note -->
-<div class="mt-10 rounded-xl border border-surface-200 bg-white px-6 py-5">
-  <h3 class="text-sm font-semibold text-surface-700">Architecture Principle</h3>
-  <p class="mt-1 text-sm leading-relaxed text-surface-500">
-    Deterministic engineering calculations are <strong class="text-surface-700">authoritative</strong>.
+<div class="mp-card">
+  <h3 style="font-size:var(--mp-text-sm); font-weight:600; color:var(--mp-text-secondary)">Architecture Principle</h3>
+  <p class="mp-card__body" style="margin-top:var(--mp-sp-1)">
+    Deterministic engineering calculations are <strong style="color:var(--mp-text)">authoritative</strong>.
     AI-generated suggestions are always labelled as advisory drafts, never silently merged into
     validated results. Every computed value carries traceable provenance back to its source rule,
     version, and engineering reference.
