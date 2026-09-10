@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block title %}CAD Import · MachineryPro AI{% endblock %}
+
+{% block content %}
+<!-- Page header -->
+<div class="mb-8">
+  <h1 class="text-2xl font-bold text-surface-900">CAD Import</h1>
+  <p class="mt-1 text-sm text-surface-500">
+    Import neutral CAD data into the MachineryPro AI canonical engineering model.
+  </p>
+</div>
+
+<!-- Upload form -->
+<div class="mb-8 rounded-xl border border-surface-200 bg-white p-6 shadow-sm">
+  <h2 class="mb-4 text-base font-semibold text-surface-700">Select CAD File</h2>
+
+  <form method="post" enctype="multipart/form-data" action="/ui/cad-import">
+    <div class="flex flex-col gap-4">
+      <div>
+        <label for="file" class="block text-sm font-medium text-surface-600 mb-1">
+          CAD file
+        </label>
+        <input type="file" name="file" id="file"
+               accept=".step,.stp,.p21,.iges,.igs,.dxf"
+               class="block w-full text-sm text-surface-600
+                      file:mr-4 file:rounded-lg file:border file:border-surface-300
+                      file:bg-surface-50 file:px-4 file:py-2 file:text-sm
+                      file:font-medium file:text-surface-700
+                      hover:file:bg-surface-100" />
+      </div>
+
+      <p class="text-xs text-surface-400">
+        Supported formats: {{ accepted_extensions }}
+      </p>
+
+      <div>
+        <button type="submit"
+                class="rounded-lg bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white
+                       shadow-sm hover:bg-brand-700 focus:outline-none focus:ring-2
+                       focus:ring-brand-500 focus:ring-offset-2 transition">
+          Import CAD
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- Error display -->
+{% if error %}
+<div class="mb-8 rounded-xl border border-red-200 bg-red-50 px-5 py-4">
+  <div class="flex items-start gap-3">
+    <span class="mt-0.5 text-red-500 font-bold text-lg">✕</span>
+    <div>
+      <p class="text-sm font-semibold text-red-800">Import Error</p>
+      <p class="mt-1 text-sm text-red-600">{{ error }}</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- Result display -->
+{% if result %}
+<div class="space-y-6">
+
+  <!-- Status banner -->
+  {% if result.succeeded %}
+  <div class="flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4">
+    <span class="h-3 w-3 rounded-full bg-emerald-500"></span>
+    <div>
+      <p class="text-sm font-semibold text-emerald-800">
+        Import {{ result.status }}
+      </p>
+      <p class="text-xs text-emerald-600">
+        {{ result.filename }} ({{ result.file_size | filesizeformat }})
+      </p>
+    </div>
+  </div>
+  {% elif result.status == "PARTIAL" or result.status == "DEGRADED" %}
+  <div class="flex items-center gap-3 rounded-xl border border-amber-200 bg-amber-50 px-5 py-4">
+    <span class="h-3 w-3 rounded-full bg-amber-500"></span>
+    <div>
+      <p class="text-sm font-semibold text-amber-800">
+        Import {{ result.status }}
+      </p>
+      <p class="text-xs text-amber-600">
+        {{ result.filename }} ({{ result.file_size | filesizeformat }})
+        {% if result.error_message %} — {{ result.error_message }}{% endif %}
+      </p>
+    </div>
+  </div>
+  {% elif result.status == "UNSUPPORTED" %}
+  <div class="flex items-center gap-3 rounded-xl border border-surface-200 bg-surface-50 px-5 py-4">
+    <span class="h-3 w-3 rounded-full bg-surface-400"></span>
+    <div>
+      <p class="text-sm font-semibold text-surface-700">
+        Format Unsupported
+      </p>
+      <p class="text-xs text-surface-500">
+        {{ result.filename }} — {{ result.error_message or "No adapter available." }}
+      </p>
+    </div>
+  </div>
+  {% else %}
+  <div class="flex items-center gap-3 rounded-xl border border-red-200 bg-red-50 px-5 py-4">
+    <span class="h-3 w-3 rounded-full bg-red-500"></span>
+    <div>
+      <p class="text-sm font-semibold text-red-800">
+        Import {{ result.status }}
+      </p>
+      <p class="text-xs text-red-600">
+        {{ result.filename }} ({{ result.file_size | filesizeformat }})
+        {% if result.error_message %} — {{ result.error_message }}{% endif %}
+      </p>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Result details grid -->
+  <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+
+    <!-- Format Detection -->
+    <div class="rounded-xl border border-surface-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-surface-400">
+        Format Detection
+      </h3>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Detected Format</dt>
+          <dd class="font-medium text-surface-800">{{ result.detected_format }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Confidence</dt>
+          <dd class="font-medium text-surface-800">{{ result.detection_confidence }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Method</dt>
+          <dd class="font-medium text-surface-800">{{ result.detection_method }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Adapter -->
+    <div class="rounded-xl border border-surface-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-surface-400">
+        Adapter
+      </h3>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Selected</dt>
+          <dd class="font-medium text-surface-800">{{ result.adapter_id }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Candidates</dt>
+          <dd class="font-medium text-surface-800">{{ result.adapter_candidates }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Selection</dt>
+          <dd class="font-medium text-surface-800">{{ result.selection_reason }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Capability -->
+    <div class="rounded-xl border border-surface-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-surface-400">
+        Capability
+      </h3>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Level</dt>
+          <dd class="font-medium text-surface-800">{{ result.capability_level }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Normalization</dt>
+          <dd class="font-medium text-surface-800">{{ result.normalization_status }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Degraded</dt>
+          <dd class="font-medium text-surface-800">{{ "Yes" if result.was_degraded else "No" }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Document -->
+    <div class="rounded-xl border border-surface-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-surface-400">
+        Canonical Document
+      </h3>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Kind</dt>
+          <dd class="font-medium text-surface-800">{{ result.canonical_kind }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Entity Refs</dt>
+          <dd class="font-medium text-surface-800">{{ result.entity_ref_count }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Schema</dt>
+          <dd class="font-medium text-surface-800">{{ result.schema_version }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Fidelity -->
+    <div class="rounded-xl border border-surface-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-surface-400">
+        Fidelity
+      </h3>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Adverse Events</dt>
+          <dd class="font-medium text-surface-800">{{ result.fidelity_adverse_count }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Data Loss</dt>
+          <dd class="font-medium text-surface-800">{{ "Yes" if result.has_loss else "No" }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Unsupported Content</dt>
+          <dd class="font-medium text-surface-800">{{ "Yes" if result.has_unsupported else "No" }}</dd>
+        </div>
+      </dl>
+    </div>
+
+    <!-- Provenance -->
+    <div class="rounded-xl border border-surface-200 bg-white p-5 shadow-sm">
+      <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-surface-400">
+        Provenance
+      </h3>
+      <dl class="space-y-2 text-sm">
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Adapter</dt>
+          <dd class="font-medium text-surface-800">{{ result.provenance_adapter }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Version</dt>
+          <dd class="font-medium text-surface-800">{{ result.provenance_version }}</dd>
+        </div>
+        <div class="flex justify-between">
+          <dt class="text-surface-500">Format</dt>
+          <dd class="font-medium text-surface-800">{{ result.provenance_format }}</dd>
+        </div>
+      </dl>
+    </div>
+
+  </div>
+
+  <!-- Diagnostic notes -->
+  {% if result.notes %}
+  <div class="rounded-xl border border-surface-200 bg-white px-6 py-5">
+    <h3 class="mb-2 text-xs font-semibold uppercase tracking-wider text-surface-400">
+      Diagnostic Notes
+    </h3>
+    <ul class="space-y-1 text-sm text-surface-600">
+      {% for note in result.notes %}
+      <li class="flex items-start gap-2">
+        <span class="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-surface-400"></span>
+        {{ note }}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+</div>
+{% endif %}
+{% endblock %}
