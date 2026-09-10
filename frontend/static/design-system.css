@@ -565,3 +565,54 @@ body {
 .mp-mono        { font-family: var(--mp-font-mono); font-size: 0.8125em; }
 .mp-sr-only     { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
                   overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* =========================================================================
+   17. BUTTON INTERACTION STATES (UI-MEDIA-0A)
+   ========================================================================= */
+.mp-btn { transition: background 150ms, border-color 150ms, transform 150ms, box-shadow 150ms; }
+.mp-btn:active { transform: translateY(1px); }
+.mp-btn--primary:active { background: var(--mp-brand-700); box-shadow: inset 0 1px 2px rgba(0,0,0,0.15); }
+.mp-btn--secondary:active { background: var(--mp-border); }
+.mp-btn:disabled, .mp-btn[disabled] {
+  opacity: 0.45; cursor: not-allowed; pointer-events: none;
+}
+
+/* =========================================================================
+   18. PROCESS SELECTOR (UI-MEDIA-0A)
+   ========================================================================= */
+.mp-process-tabs {
+  display: flex; gap: 2px; background: var(--mp-border);
+  border-radius: var(--mp-radius-md); padding: 2px; width: fit-content;
+}
+.mp-process-tab {
+  padding: var(--mp-sp-2) var(--mp-sp-4);
+  font-size: var(--mp-text-sm); font-weight: 500; font-family: var(--mp-font);
+  color: var(--mp-text-secondary);
+  background: transparent; border: none; border-radius: var(--mp-radius);
+  cursor: pointer; transition: background 150ms, color 150ms;
+}
+.mp-process-tab:hover { color: var(--mp-text); background: rgba(0,0,0,0.03); }
+.mp-process-tab--active {
+  background: var(--mp-bg-card); color: var(--mp-text);
+  font-weight: 600; box-shadow: var(--mp-shadow-card);
+}
+.mp-process-tab:focus-visible {
+  outline: 2px solid var(--mp-brand-500); outline-offset: 1px;
+}
+
+.mp-process-visual {
+  background: var(--mp-bg-card); border: 1px solid var(--mp-border);
+  border-radius: var(--mp-radius-md); padding: var(--mp-sp-4);
+  min-height: 200px; display: flex; align-items: center; justify-content: center;
+}
+
+/* =========================================================================
+   19. MOTION / REDUCED MOTION (UI-MEDIA-0A)
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

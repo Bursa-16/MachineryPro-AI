@@ -4,20 +4,23 @@
 <div style="max-width:76rem; margin:0 auto; padding:0 var(--mp-sp-6);">
 
 <!-- ===== HERO ===== -->
-<section style="padding:var(--mp-sp-10) 0 var(--mp-sp-8); max-width:48rem;">
-  <h1 style="font-size:2rem; font-weight:700; line-height:1.2; color:var(--mp-text); margin:0;">
-    Manufacturing engineering intelligence,<br>
-    deterministic-first.
-  </h1>
-  <p style="font-size:var(--mp-text-md); color:var(--mp-text-secondary); margin-top:var(--mp-sp-4); line-height:1.6; max-width:40rem;">
-    MachineryPro AI combines authoritative engineering calculations with AI-assisted
-    decision support for CNC machining, process planning, and design-for-manufacturability.
-    Every result is traceable. AI suggestions are always clearly labelled.
-  </p>
-  <div style="display:flex; gap:var(--mp-sp-3); margin-top:var(--mp-sp-6); flex-wrap:wrap;">
-    <a href="/app" class="mp-btn mp-btn--primary">Start MachineryPro AI</a>
-    <a href="#contact" class="mp-btn mp-btn--secondary">Request Demo</a>
+<section style="padding:var(--mp-sp-10) 0 var(--mp-sp-8); display:flex; gap:var(--mp-sp-8); align-items:center; flex-wrap:wrap;">
+  <div style="flex:1; min-width:280px;">
+    <h1 style="font-size:2rem; font-weight:700; line-height:1.2; color:var(--mp-text); margin:0;">
+      Manufacturing engineering intelligence,<br>
+      deterministic-first.
+    </h1>
+    <p style="font-size:var(--mp-text-md); color:var(--mp-text-secondary); margin-top:var(--mp-sp-4); line-height:1.6; max-width:40rem;">
+      MachineryPro AI combines authoritative engineering calculations with AI-assisted
+      decision support for CNC machining, process planning, and design-for-manufacturability.
+      Every result is traceable. AI suggestions are always clearly labelled.
+    </p>
+    <div style="display:flex; gap:var(--mp-sp-3); margin-top:var(--mp-sp-6); flex-wrap:wrap;">
+      <a href="/app" class="mp-btn mp-btn--primary">Start MachineryPro AI</a>
+      <a href="#contact" class="mp-btn mp-btn--secondary">Request Demo</a>
+    </div>
   </div>
+  <div id="mp-hero-visual" style="flex:0 0 auto; max-width:480px; width:100%;"></div>
 </section>
 
 <!-- ===== HOW IT WORKS ===== -->
@@ -132,6 +135,28 @@
     <div class="mp-card"><h3 class="mp-card__title">Tool &amp; Machine Capability Validation</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Validate tool geometry, machine power, spindle speed limits, and capability against operation requirements.</p></div>
     <div class="mp-card"><h3 class="mp-card__title">DFM / Manufacturability Review</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Automated design-for-manufacturability checks with clear pass/warn/fail results and engineering rationale.</p></div>
     <div class="mp-card"><h3 class="mp-card__title">Process Planning &amp; Traceability</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Build validated process plans with predecessor dependencies, sequence checks, and full audit trail.</p></div>
+  </div>
+</section>
+
+<!-- ===== MACHINING PROCESS EXPLORER ===== -->
+<section id="process-explorer" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">Machining Process Explorer</h2>
+  <p style="font-size:var(--mp-text-sm); color:var(--mp-text-secondary); margin-bottom:var(--mp-sp-5); max-width:40rem;">
+    Select a machining process to see a conceptual engineering visualization.
+    All visuals are original technical illustrations — not screenshots from external software.
+  </p>
+  <div id="mp-process-selector">
+    <div class="mp-process-tabs" data-process-tabs role="tablist">
+      <button class="mp-process-tab" data-process="milling" role="tab" aria-selected="true">Milling</button>
+      <button class="mp-process-tab" data-process="turning" role="tab" aria-selected="false">Turning</button>
+      <button class="mp-process-tab" data-process="drilling" role="tab" aria-selected="false">Drilling</button>
+      <button class="mp-process-tab" data-process="validation" role="tab" aria-selected="false">Validation</button>
+    </div>
+    <div style="margin-top:var(--mp-sp-4);">
+      <div class="mp-process-visual" data-process-visual></div>
+      <h3 data-process-title style="font-size:var(--mp-text-md); font-weight:600; margin-top:var(--mp-sp-3);"></h3>
+      <p data-process-desc style="font-size:var(--mp-text-sm); color:var(--mp-text-secondary);"></p>
+    </div>
   </div>
 </section>
 
