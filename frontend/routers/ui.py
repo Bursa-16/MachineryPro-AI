@@ -107,13 +107,18 @@ def _render(
 # -- Routes ----------------------------------------------------------------
 
 @router.get("/", response_class=HTMLResponse)
-async def root(request: Request) -> HTMLResponse:
-    """Redirect root to dashboard."""
-    return _render(
-        request,
-        "index.html",
-        _context(active_href="/ui/", cards=DASHBOARD_CARDS),
-    )
+async def landing(request: Request) -> HTMLResponse:
+    """Public MachineryPro AI landing page."""
+    templates = request.app.state.templates
+    return templates.TemplateResponse(request, "landing.html", {})
+
+
+@router.get("/app")
+async def app_entry() -> HTMLResponse:
+    """Application entry — redirect to engineering workspace."""
+    from fastapi.responses import RedirectResponse
+
+    return RedirectResponse(url="/ui/", status_code=302)
 
 
 @router.get("/ui/", response_class=HTMLResponse)

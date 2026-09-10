@@ -1,0 +1,208 @@
+{% extends "public_base.html" %}
+
+{% block content %}
+<div style="max-width:76rem; margin:0 auto; padding:0 var(--mp-sp-6);">
+
+<!-- ===== HERO ===== -->
+<section style="padding:var(--mp-sp-10) 0 var(--mp-sp-8); max-width:48rem;">
+  <h1 style="font-size:2rem; font-weight:700; line-height:1.2; color:var(--mp-text); margin:0;">
+    Manufacturing engineering intelligence,<br>
+    deterministic-first.
+  </h1>
+  <p style="font-size:var(--mp-text-md); color:var(--mp-text-secondary); margin-top:var(--mp-sp-4); line-height:1.6; max-width:40rem;">
+    MachineryPro AI combines authoritative engineering calculations with AI-assisted
+    decision support for CNC machining, process planning, and design-for-manufacturability.
+    Every result is traceable. AI suggestions are always clearly labelled.
+  </p>
+  <div style="display:flex; gap:var(--mp-sp-3); margin-top:var(--mp-sp-6); flex-wrap:wrap;">
+    <a href="/app" class="mp-btn mp-btn--primary">Start MachineryPro AI</a>
+    <a href="#contact" class="mp-btn mp-btn--secondary">Request Demo</a>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how-it-works" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">How It Works</h2>
+  <div style="display:flex; flex-wrap:wrap; gap:var(--mp-sp-3); align-items:center;">
+    <span class="mp-badge mp-badge--ready">CAD Data</span>
+    <span style="color:var(--mp-text-muted);">→</span>
+    <span class="mp-badge mp-badge--ready">Geometry / Topology</span>
+    <span style="color:var(--mp-text-muted);">→</span>
+    <span class="mp-badge mp-badge--ready">Process Analysis</span>
+    <span style="color:var(--mp-text-muted);">→</span>
+    <span class="mp-badge mp-badge--ready">Machining Method</span>
+    <span style="color:var(--mp-text-muted);">→</span>
+    <span class="mp-badge mp-badge--ready">Tool &amp; Parameters</span>
+    <span style="color:var(--mp-text-muted);">→</span>
+    <span class="mp-badge mp-badge--ready">Validation</span>
+    <span style="color:var(--mp-text-muted);">→</span>
+    <span class="mp-badge mp-badge--ready">Traceability</span>
+    <span style="color:var(--mp-text-muted);">→</span>
+    <span class="mp-badge mp-badge--unavail">AI Assistance <small>PLANNED</small></span>
+  </div>
+  <p style="font-size:var(--mp-text-sm); color:var(--mp-text-secondary); margin-top:var(--mp-sp-4); max-width:48rem;">
+    Import neutral CAD data, extract canonical geometry and topology, select machining
+    processes, calculate cutting parameters, validate against engineering rules, and
+    maintain full traceability from input to result.
+  </p>
+</section>
+
+<!-- ===== CAPABILITIES ===== -->
+<section id="capabilities" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">Current Capabilities</h2>
+  <div class="mp-card-grid mp-card-grid--3">
+    <div class="mp-card">
+      <div class="mp-card__header"><span class="mp-card__section-label">Stage 4A–4F</span><span class="mp-badge mp-badge--ready">Ready</span></div>
+      <h3 class="mp-card__title">CAD Interoperability</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">STEP / STP, IGES / IGS, and DXF import with canonical geometry and topology extraction.</p>
+    </div>
+    <div class="mp-card">
+      <div class="mp-card__header"><span class="mp-card__section-label">Stage 3</span><span class="mp-badge mp-badge--ready">Ready</span></div>
+      <h3 class="mp-card__title">Machining Engineering</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">Turning, drilling, milling, threading, and hole finishing with deterministic formulas and engineering rules.</p>
+    </div>
+    <div class="mp-card">
+      <div class="mp-card__header"><span class="mp-card__section-label">Stage 3</span><span class="mp-badge mp-badge--ready">Ready</span></div>
+      <h3 class="mp-card__title">DFM Validation</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">Design-for-manufacturability checks: hole-tool diameter, corner radius, slot width, pocket access, depth/diameter ratio.</p>
+    </div>
+    <div class="mp-card">
+      <div class="mp-card__header"><span class="mp-card__section-label">Stage 3J</span><span class="mp-badge mp-badge--ready">Ready</span></div>
+      <h3 class="mp-card__title">Process Planning</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">Deterministic plan builder with acyclicity validation, predecessor checks, and aggregate status.</p>
+    </div>
+    <div class="mp-card">
+      <div class="mp-card__header"><span class="mp-card__section-label">Roadmap</span><span class="mp-badge mp-badge--unavail">Planned</span></div>
+      <h3 class="mp-card__title">Material Recommendation</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">Material selection guidance with ISO material group mapping and heat treatment awareness.</p>
+    </div>
+    <div class="mp-card">
+      <div class="mp-card__header"><span class="mp-card__section-label">Roadmap</span><span class="mp-badge mp-badge--unavail">Planned</span></div>
+      <h3 class="mp-card__title">AI Assistant</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">AI-assisted engineering advisory — always clearly labelled, never silently overriding deterministic results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DETERMINISTIC VS AI ===== -->
+<section id="approach" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">Deterministic Engineering + AI Assistance</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--mp-sp-4);">
+    <div class="mp-card mp-card--calc">
+      <span class="mp-badge mp-badge--calc" style="margin-bottom:var(--mp-sp-3); display:inline-flex;">Calculated</span>
+      <h3 class="mp-card__title">Deterministic Engineering</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">
+        Authoritative calculations based on engineering rules and formulas.
+        Traceable provenance from input to result. Units always visible.
+        Validated against known engineering references.
+      </p>
+    </div>
+    <div class="mp-card mp-card--ai">
+      <span class="mp-badge mp-badge--ai" style="margin-bottom:var(--mp-sp-3); display:inline-flex;">AI Assisted</span>
+      <h3 class="mp-card__title">AI Advisory</h3>
+      <p class="mp-card__body" style="margin-top:var(--mp-sp-2)">
+        Explainable AI suggestions that support engineering decisions.
+        Always visually distinct from deterministic results.
+        Never silently merged into validated engineering output.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHO IT IS FOR ===== -->
+<section id="audience" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">Built for Manufacturing Professionals</h2>
+  <div class="mp-card-grid mp-card-grid--3">
+    <div class="mp-card"><h3 class="mp-card__title">Manufacturing Engineers</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Process selection, parameter optimization, and DFM validation.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">CNC Programmers</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Cutting parameters, tool selection, and machine capability checks.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Process Engineers</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Process planning, sequence validation, and traceability.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Industrialization Engineers</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">CAD-to-manufacturing pipeline for new product introduction.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Manufacturing Quality</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Engineering rule validation, provenance, and audit trails.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Engineering Managers</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Traceable, standardized engineering decisions across teams.</p></div>
+  </div>
+</section>
+
+<!-- ===== USE CASES ===== -->
+<section id="use-cases" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">Use Cases</h2>
+  <div class="mp-card-grid mp-card-grid--2">
+    <div class="mp-card"><h3 class="mp-card__title">CAD Import &amp; Engineering Interpretation</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Import STEP, IGES, DXF and extract canonical geometry and topology for downstream engineering analysis.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Machining Process Selection</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Deterministic selection of turning, drilling, milling, threading, or hole finishing based on feature and part requirements.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Cutting Parameter Calculation</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Speed, feed, depth, MRR, power, and torque calculated from validated engineering formulas with traceable provenance.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Tool &amp; Machine Capability Validation</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Validate tool geometry, machine power, spindle speed limits, and capability against operation requirements.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">DFM / Manufacturability Review</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Automated design-for-manufacturability checks with clear pass/warn/fail results and engineering rationale.</p></div>
+    <div class="mp-card"><h3 class="mp-card__title">Process Planning &amp; Traceability</h3><p class="mp-card__body" style="margin-top:var(--mp-sp-1)">Build validated process plans with predecessor dependencies, sequence checks, and full audit trail.</p></div>
+  </div>
+</section>
+
+<!-- ===== PRICING ===== -->
+<section id="pricing" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">Packages</h2>
+  <div class="mp-card-grid mp-card-grid--3">
+    <div class="mp-card">
+      <div class="mp-card__section-label" style="margin-bottom:var(--mp-sp-2)">Starter</div>
+      <h3 class="mp-card__title">Starter</h3>
+      <p style="font-size:var(--mp-text-lg); font-weight:700; color:var(--mp-text-muted); margin:var(--mp-sp-2) 0;">TBD</p>
+      <p class="mp-card__body">Core machining calculations, basic CAD import, validation, and deterministic engineering results.</p>
+    </div>
+    <div class="mp-card" style="border-color:var(--mp-brand-500);">
+      <div class="mp-card__section-label" style="margin-bottom:var(--mp-sp-2)">Professional</div>
+      <h3 class="mp-card__title">Professional</h3>
+      <p style="font-size:var(--mp-text-lg); font-weight:700; color:var(--mp-text-muted); margin:var(--mp-sp-2) 0;">TBD</p>
+      <p class="mp-card__body">Advanced process planning, tooling libraries, materials, deeper CAD analysis, and AI assistance.</p>
+    </div>
+    <div class="mp-card">
+      <div class="mp-card__section-label" style="margin-bottom:var(--mp-sp-2)">Enterprise</div>
+      <h3 class="mp-card__title">Enterprise</h3>
+      <p style="font-size:var(--mp-text-lg); font-weight:700; color:var(--mp-text-muted); margin:var(--mp-sp-2) 0;">TBD</p>
+      <p class="mp-card__body">Company-specific libraries, machine fleet integration, governance, traceability, APIs, and custom deployment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-5);">Frequently Asked Questions</h2>
+  <div style="display:flex; flex-direction:column; gap:var(--mp-sp-2); max-width:48rem;">
+    <details class="mp-detail">
+      <summary class="mp-detail__header">Which CAD formats are supported?</summary>
+      <div class="mp-detail__body"><p class="mp-card__body">Currently: STEP / STP (.step, .stp, .p21), IGES / IGS (.iges, .igs), and DXF (.dxf). Native CAD formats (CATIA, NX, SolidWorks) are not currently supported.</p></div>
+    </details>
+    <details class="mp-detail">
+      <summary class="mp-detail__header">Does AI override engineering calculations?</summary>
+      <div class="mp-detail__body"><p class="mp-card__body">No. Deterministic engineering calculations are authoritative. AI assistance is advisory-only and always visually distinguished from validated engineering results.</p></div>
+    </details>
+    <details class="mp-detail">
+      <summary class="mp-detail__header">Which machining processes are supported?</summary>
+      <div class="mp-detail__body"><p class="mp-card__body">Turning, drilling, milling, threading, and hole finishing — each with deterministic formulas for speed, feed, depth, MRR, power, torque, and time calculations.</p></div>
+    </details>
+    <details class="mp-detail">
+      <summary class="mp-detail__header">Are engineering calculations traceable?</summary>
+      <div class="mp-detail__body"><p class="mp-card__body">Yes. Every calculated result includes provenance: source rule, version, input values, and engineering reference — providing a complete audit trail.</p></div>
+    </details>
+    <details class="mp-detail">
+      <summary class="mp-detail__header">Can company-specific tools and machines be added?</summary>
+      <div class="mp-detail__body"><p class="mp-card__body">The catalog architecture supports registering custom tools, machines, and materials. This capability is planned for the Professional and Enterprise tiers.</p></div>
+    </details>
+    <details class="mp-detail">
+      <summary class="mp-detail__header">Is CAM integration planned?</summary>
+      <div class="mp-detail__body"><p class="mp-card__body">Advanced CAM integration is on the roadmap. Current focus is on the deterministic engineering core and CAD interoperability pipeline.</p></div>
+    </details>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" style="padding:var(--mp-sp-8) 0;">
+  <h2 style="font-size:var(--mp-text-xl); font-weight:700; margin:0 0 var(--mp-sp-3);">Get Started</h2>
+  <p style="font-size:var(--mp-text-sm); color:var(--mp-text-secondary); margin-bottom:var(--mp-sp-5); max-width:36rem;">
+    Explore the engineering workspace directly or request a guided demonstration.
+    Response-time commitment will be published before commercial release.
+  </p>
+  <div style="display:flex; gap:var(--mp-sp-3); flex-wrap:wrap;">
+    <a href="/app" class="mp-btn mp-btn--primary">Start MachineryPro AI</a>
+    <a href="mailto:demo@machineryproai.com" class="mp-btn mp-btn--secondary">Request Demo</a>
+  </div>
+</section>
+
+</div>
+{% endblock %}
